@@ -42,6 +42,7 @@ public class Top34 {
         //int[] nums = {1,3};
         int[] nums = {3,3,3};
         System.out.println(Arrays.toString(top34.searchRange(nums, 3)));
+        System.out.println(Arrays.toString(top34.searchRange1(nums, 3)));
     }
 
     /**
@@ -78,6 +79,32 @@ public class Top34 {
         return new int[]{-1,-1};
     }
 
+    /**
+     * 二分查找：
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int[] searchRange2(int[] nums, int target) {
+        if (nums.length == 0) return new int[]{-1,-1};
+        int[] res = new int[]{-1,-1};
+        int l = 0, r = nums.length - 1;
+        while (l <= r){
+            int mid = (l + r) / 2;
+            if (nums[mid] < target) l = mid + 1;
+            else if (nums[mid] > target) r = mid - 1;
+            else {
+                int left = mid, right = mid;
+                while (left >= 0 && nums[left] == target) left--;
+                res[0] = left + 1;
+                while (right <= nums.length - 1 && nums[right] == target) right++;
+                res[1] = right - 1;
+                return res;
+            }
+        }
+        return res;
+    }
+
 
     /**
      * 题解链接：https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/solution/zai-pai-xu-shu-zu-zhong-cha-zhao-yuan-su-de-di-3-4/
@@ -102,6 +129,7 @@ public class Top34 {
         int left = 0,right = nums.length - 1,ans = nums.length;
         while (left <= right){ //因为是寻找第一个，所以找到后不立即返回，而是继续寻找第一个
             int mid = (left + right)/2;
+            //如果nums[mid] >= target,就一直向左寻找，直到找到第一个target为止
             if (nums[mid] > target || (lower && nums[mid] >= target)){
                 right = mid - 1;
                 ans = mid;
