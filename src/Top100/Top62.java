@@ -89,7 +89,7 @@ public class Top62 {
      * @param n
      * @return
      */
-    /*public int uniquePaths(int m, int n) {
+    public int uniquePaths1(int m, int n) {
         int[] dp = new int[n];
         Arrays.fill(dp, 1);
         for (int i = 1; i < m; i++) {
@@ -99,7 +99,7 @@ public class Top62 {
             }
         }
         return dp[n-1];
-    }*/
+    }
 
 
     /**
@@ -116,11 +116,11 @@ public class Top62 {
      * @param n
      * @return
      */
-    /*public int uniquePaths(int m, int n) {
+    public int uniquePaths2(int m, int n) {
         long ans = 1;
         for (int x = n, y = 1; y < m; x++,y++) {
             ans = (ans * x) / y;
         }
         return (int)ans;
-    }*/
+    }
 }
