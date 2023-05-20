@@ -23,8 +23,10 @@ public class Offer40 {
     public static void main(String[] args) {
         //int[] arr = {0,1,2,1};
         int[] arr = {6,9,9,3,4,1,3};
+        int[] nums = {10,9,8,7,6,5,4,3,2,1};
         Offer40 offer40 = new Offer40();
-        System.out.println(Arrays.toString(offer40.getLeastNumbers(arr, 3)));
+        //System.out.println(Arrays.toString(offer40.getLeastNumbers(arr, 3)));
+        System.out.println(Arrays.toString(offer40.getLeastNumbers1(nums, 3)));
     }
 
     /**
@@ -40,34 +42,35 @@ public class Offer40 {
      * @param k
      * @return
      */
-    //public int[] getLeastNumbers(int[] arr, int k) {
-    //    quickSort(arr, 0, arr.length-1);
-    //    return Arrays.copyOf(arr, k);
-    //}
-    //
-    //public void quickSort(int[] arr,int l,int r){
-    //    //子数组长度为1时终止递归
-    //    if(l>=r) return;
-    //    //哨兵划分操作（以arr[l]为基准数）
-    //    int i = l,j = r;
-    //    while (i<j){
-    //        //注意：先移动 j 指针，再移动 i 指针，令 i 与 j 汇合，再交换 i与l 的值，则 分为两部分，i 处为初始的哨兵值
-    //        //否则，若先移动 i ，令 j 与 i汇合，则最终 i 的值为 比 哨兵值l 大的值，则交换 i 和 l，不能将数组分为两部分
-    //        while (i<j && arr[j] >= arr[l]) j--;
-    //        while (i<j && arr[i] <= arr[l]) i++;
-    //        swap(arr,i,j);
-    //    }
-    //    swap(arr,i,l);
-    //    //递归（左）右数组执行哨兵划分
-    //    quickSort(arr, l, i-1);
-    //    quickSort(arr, i+1, r);
-    //}
-    //
-    //public void swap(int[] arr,int i,int j){
-    //    int temp = arr[i];
-    //    arr[i] = arr[j];
-    //    arr[j] = temp;
-    //}
+    public int[] getLeastNumbers1(int[] arr, int k) {
+        quickSort1(arr, 0, arr.length-1);
+        return Arrays.copyOf(arr, k);
+    }
+
+    public void quickSort1(int[] arr,int l,int r){
+        //子数组长度为1时终止递归
+        if(l>=r) return;
+        //哨兵划分操作（以arr[l]为基准数）
+        int i = l,j = r;
+        while (i<j){
+            //注意：先移动 j 指针，再移动 i 指针，令 i 与 j 汇合，再交换 i与l 的值，则 分为两部分，i 处为初始的哨兵值
+            //否则，若先移动 i ，令 j 与 i汇合，则最终 i 的值为 比 哨兵值l 大的值，则交换 i 和 l，不能将数组分为两部分
+            while (i<j && arr[j] >= arr[l]) j--;
+            while (i<j && arr[i] <= arr[l]) i++;
+            swap1(arr,i,j);
+        }
+        swap1(arr,i,l);
+        System.out.println(Arrays.toString(arr));
+        //递归（左）右数组执行哨兵划分
+        quickSort1(arr, l, i-1);
+        quickSort1(arr, i+1, r);
+    }
+
+    public void swap1(int[] arr,int i,int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 
 
     /**
