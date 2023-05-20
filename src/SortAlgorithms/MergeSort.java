@@ -96,6 +96,8 @@ public class MergeSort {
             t++;
             tempLeft++;
         }
+        System.out.println(Arrays.toString(temp));
+        System.out.println(Arrays.toString(nums));
         return nums;
     }
 
