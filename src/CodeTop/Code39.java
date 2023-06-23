@@ -83,7 +83,7 @@ public class Code39 {
         if (candidates.length == 0) return res;
         Deque<Integer> path = new LinkedList<>();
         Arrays.sort(candidates);
-        recur1(res,path,candidates,target, 0 );
+        recur1(res,path,candidates,target, 0);
         return res;
     }
 

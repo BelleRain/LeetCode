@@ -79,7 +79,7 @@ public class Code08 {
 
     /**
      * 第一步：跳过前置空格
-     * 第二步：判断正负号 ‘+’，‘-’，整数sign = 1 ，负数 sign = -1
+     * 第二步：判断正负号 ‘+’，‘-’，整数 sign = 1 ，负数 sign = -1
      * 第三步：判断是否为数字，即 ‘0’ <= c <= '9',若是继续向下遍历，否则停止遍历
      * 第四步：逐步计算数值，并判断是否溢出，若溢出，则按题目要求返回
      *
@@ -103,7 +103,7 @@ public class Code08 {
             sign = array[index] == '+' ? 1 : -1;
             index++;
         }
-        //第三步：判断是否为数字，即 ‘0’ <= c <= '9',若是继续向下遍历，否则停止遍历
+        //第三步：判断是否为数字，即 '0' <= c <= '9',若是继续向下遍历，否则停止遍历
         while (index < len && (array[index] >= '0' && array[index] <= '9')) {
             int dight = array[index] - '0';
             //第四步：逐步计算数值，并判断是否溢出，若溢出，则按题目要求返回
@@ -116,6 +116,7 @@ public class Code08 {
             ans = ans * 10 + dight;
             index++;
         }
+        //-Integer.MIN_VALUE = Integer.MIN_VALUE
         return ans * sign;
     }
 }

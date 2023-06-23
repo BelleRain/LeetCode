@@ -56,6 +56,8 @@ public class Code227 {
         String s = "1-1+1";
         System.out.println(calculate(s));
         System.out.println(calculateAns("3+2*2"));
+
+        //System.out.println(calculateAns("6*((5+(2+3)*8)+3)"));
     }
 
     /**
@@ -247,7 +249,7 @@ public class Code227 {
 
 
     /**
-     * 简单的方法：
+     * 简单的方法：( 不适合带括号的表达式 ，例如： 6*((5+(2+3)*8)+3) )
      * "3+2*2"  "+3-2*2"
      * 执行用时： 19 ms , 在所有 Java 提交中击败了 75.85% 的用户
      * 内存消耗： 44 MB , 在所有 Java 提交中击败了 31.41% 的用户

@@ -2,7 +2,7 @@ package CodeTop;
 
 /**
  * @author mxy
- * @create 2023-04-27 19:34
+ * @create 2023-06-21 9:19
  */
 
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 144. 二叉树的前序遍历    链接：https://leetcode.cn/problems/binary-tree-preorder-traversal
- * 给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
+ * 145. 二叉树的后序遍历    链接：https://leetcode.cn/problems/binary-tree-postorder-traversal
+ * 给你一棵二叉树的根节点 root ，返回其节点值的 后序遍历 。
  *
  * 示例 1：
  * 输入：root = [1,null,2,3]
- * 输出：[1,2,3]
+ * 输出：[3,2,1]
  *
  * 示例 2：
  * 输入：root = []
@@ -25,55 +25,55 @@ import java.util.List;
  * 示例 3：
  * 输入：root = [1]
  * 输出：[1]
- *
- * 示例 4：
- * 输入：root = [1,2]
- * 输出：[1,2]
- *
- * 示例 5：
- * 输入：root = [1,null,2]
- * 输出：[1,2]
- *
- * 提示：
- * 树中节点数目在范围 [0, 100] 内
- * -100 <= Node.val <= 100
  *  
- * 进阶：递归算法很简单，你可以通过迭代算法完成吗？
+ * 提示：
+ * 树中节点的数目在范围 [0, 100] 内
+ * -100 <= Node.val <= 100
  *
+ * 进阶：递归算法很简单，你可以通过迭代算法完成吗？
  */
-public class Code144 {
+public class Code145 {
+
 
     /**
-     * 递归：
+     * 题解一：递归写法
      * @param root
      * @return
      */
     List<Integer> res = new ArrayList<>();
-    public List<Integer> preorderTraversal_Recur(TreeNode root) {
+    public List<Integer> postorderTraversal1(TreeNode root) {
         if (root == null) return res;
+        postorderTraversal1(root.left);
+        postorderTraversal1(root.right);
         res.add(root.val);
-        preorderTraversal_Recur(root.left);
-        preorderTraversal_Recur(root.right);
         return res;
     }
 
 
     /**
-     * 迭代：
+     * 题解二：迭代写法
      * @param root
      * @return
      */
-    public List<Integer> preorderTraversal_Iter(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
         Deque<TreeNode> stack = new LinkedList<>();
-        while (root != null || !stack.isEmpty()){
-            while (root != null){
-                res.add(root.val);
+        TreeNode prev = null;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
                 stack.push(root);
                 root = root.left;
             }
-            root = stack.pop().right;
+            root = stack.pop();
+            if (root.right == null || root.right == prev){
+                res.add(root.val);
+                prev = root;
+                root = null;
+            } else {
+                stack.push(root);
+                root = root.right;
+            }
         }
         return res;
     }
@@ -98,6 +98,10 @@ public class Code144 {
         }
     }
 }
+
+
+
+
 
 
 

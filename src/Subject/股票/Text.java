@@ -51,7 +51,7 @@ public class Text {
      *      T[i][0][0] = 0, T[i][0][1] = -Infinity
      *  状态转移方程：
      *      T[i][k][0] = max(T[i - 1][k][0], T[i - 1][k][1] + prices[i])
-     *      T[i][k][1] = max(T[i - 1][k][1], T[i - 1][k][0] - prices[i])
+     *      T[i][k][1] = max(T[i - 1][k][1], T[i - 1][k - 1][0] - prices[i])
      *  基准情况中，T[i][k][0] = T[i][0][0] = 0 的含义和上文相同，T[-1][k][1] = T[i][0][1] = -Infinity 的含义是在没有进行股票交易时不允许持有股票
      *  对于状态转移方程中的
      *      T[i][k][0],第 i 天进行的操作只能是 休息或卖出，因为在第 i 天结束时持有股票数量是 0 。
@@ -132,7 +132,7 @@ public class Text {
      *         }
      *         return dp[length - 1][0];
      *     }
-     *  如果注意到第 i 天的最大收益只和第 i - 1 天的最大收益相关，空间复杂度可以降到 O(1)O(1)。
+     *  如果注意到第 i 天的最大收益只和第 i - 1 天的最大收益相关，空间复杂度可以降到 O(1)。
      *    public int maxProfit(int[] prices) {
      *         if (prices == null || prices.length == 0) {
      *             return 0;
@@ -159,7 +159,7 @@ public class Text {
      *      T[i][1][0] = max(T[i - 1][1][0] , T[i - 1][1][1] + prices[i])
      *      T[i][1][1] = max(T[i - 1][1][1] , T[i - 1][0][0] - prices[i]) = max(T[i - 1][1][1] , - prices[i])
      *      第四个状态转移方程利用了 T[i][0][0] = 0。
-     *      根据上述状态转移方程，可以写出时间复杂度为 O(n)O(n) 和空间复杂度为 O(n)O(n) 的解法。
+     *      根据上述状态转移方程，可以写出时间复杂度为 O(n) 和空间复杂度为 O(n) 的解法。
      *      public int maxProfit(int[] prices) {
      *             if (prices == null || prices.length == 0) {
      *                 return 0;
@@ -200,7 +200,7 @@ public class Text {
      *     一个有收益的交易至少需要两天（在前一天买入，在后一天卖出，前提是买入价格低于卖出价格）。
      *     如果股票价格数组的长度为 n ，则有收益的交易的数量最多为 n/2(整数除法)。因此 k 的临界值是 n/2。
      *     如果给定的 k 不小于临界值，即 k >= n/2, 则可以将 k 扩展为正无穷，此时问题等价于情况二。
-     *     根据状态转移方程，可以写出时间复杂度为 O(nk)O(nk) 和空间复杂度为 O(nk)O(nk) 的解法。
+     *     根据状态转移方程，可以写出时间复杂度为 O(nk) 和空间复杂度为 O(nk) 的解法。
      *     public int maxProfit(int k, int[] prices) {
      *         if(prices == null || prices.length == 0){
      *             return 0;
@@ -286,7 +286,7 @@ public class Text {
      *      状态转移方程中的别的项保持不变，新的状态转移方程如下：
      *          T[i][k][0] = max(T[i - 1][k][0], T[i - 1][k][1] + prices[i])
      *          T[i][k][1] = max(T[i - 1][k][1], T[i - 2][k][0] - prices[i])
-     *    根据上述状态转移方程，可以写出时间复杂度为 O(n)O(n) 和空间复杂度为 O(n)O(n) 的解法。
+     *    根据上述状态转移方程，可以写出时间复杂度为 O(n) 和 空间复杂度为 O(n) 的解法。
      *      public int maxProfit(int[] prices) {
      *             if (prices == null || prices.length == 0){
      *                 return 0;
@@ -330,7 +330,7 @@ public class Text {
      *    第二种表示方法，在每次卖出股票是扣除手续费：
      *      T[i][k][0] = max(T[i - 1][k][0] , T[i - 1][k][1] + prices[i] - fee)
      *      T[i][k][1] = max(T[i - 1][k][1] , T[i - 1][k][0] - prices[i])
-     *  根据上述状态转移方程，可以写出时间复杂度为 O(n)O(n) 和空间复杂度为 O(n)O(n) 的解法。
+     *  根据上述状态转移方程，可以写出时间复杂度为 O(n) 和空间复杂度为 O(n) 的解法。
      *      public int maxProfit(int[] prices, int fee) {
      *         if (prices == null || prices.length == 0){
      *             return 0;
@@ -362,7 +362,7 @@ public class Text {
      *     }
      * 三、总结
      *   总而言之，股票问题是最通用的情况由三个特征决定：当前的天数i、允许的最大交易次数k，以及每天结束时持有的股票数。
-     *   这篇文章阐述了最大利润的状态转移方程和终止条件，由此可以得到时间复杂度为 O(nk)O(nk) 和空间复杂度为 O(k)O(k) 的解法。
+     *   这篇文章阐述了最大利润的状态转移方程和终止条件，由此可以得到时间复杂度为 O(nk) 和空间复杂度为 O(k) 的解法。
      *   该解法可以应用于六个问题，对于最后两个问题，需要将状态转移方程进行一些修改。这里推荐 peterleetcode （链接失效！！！或者见文章原文）的 解法，
      *   该解法可以推广到任意的 k 值，感兴趣的读者可以进行阅读。
      */

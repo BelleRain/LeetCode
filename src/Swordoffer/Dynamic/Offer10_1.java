@@ -90,8 +90,8 @@ public class Offer10_1 {
     //    int a=0,b=1,sum = a+b;
     //    for (int i = 0; i < n; i++) {
     //        sum = (a + b) % 1000000007;
-    //        a=b;  //a位于d[p]的位置
-    //        b=sum;
+    //        a=b;  // a位于d[p]的位置
+    //        b=sum; // b 位于 dp[p + 1] 的位置
     //    }
     //    return a;
     //}
